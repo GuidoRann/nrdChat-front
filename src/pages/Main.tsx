@@ -1,20 +1,33 @@
 export default function Main() {
   return (
-    <div className="w-screen h-screen bg-slate-700 py-20 px-40 flex flex-row">
-      <div className="h-full w-1/5 bg-white">
-        <h1 className="text-center font-black text-xl text-slate-700">
-          Contactos
-        </h1>
-      </div>
-      <div className="h-full w-4/5 bg-blue-300 flex flex-col justify-between">
-        <h1 className="text-center font-black text-xl text-white">Mensajes</h1>
-        <div className="relative h-11 w-full min-w-[200px] flex flex-row">
-          <input
-            placeholder="Escribe tu mensaje aquí!"
-            className="peer h-full w-full rounded-md border border-blue-gray-200 border-t-transparent bg-white px-3 py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-cyan-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
-          />
-          <label className="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[4.1] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-cyan-500 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:!border-cyan-500 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:!border-cyan-500 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500"></label>
-          <button className="bg-slate-600 rounded-lg text-white">Enviar</button>
+    <div className="w-screen h-screen bg-slate-700 flex justify-center items-center">
+      <div className="bg-gray-300 w-1/4 h-5/6 flex flex-col items-center pt-6 gap-4 rounded-lg">
+        <div className="w-[90%] h-32 bg-white rounded-md flex items-center p-2">
+          <div className="w-28 h-28 bg-blue-300 rounded-full">
+            <img src="" alt="" />
+          </div>
+          <div className="flex flex-col w-[70%] h-full gap-4">
+            <div className="text-center h-4/5 flex flex-col justify-center">
+              <p>El Enzo</p>
+            </div>
+            // TODO: darle utilidad y estilo a los botones
+            <div className="h-1/5 flex flex-row gap-4 justify-center">
+              <button className="">+</button>
+              <button className="">-</button>
+            </div>
+          </div>
+        </div>
+        <div className="w-[90%] h-[75%] bg-white p-2 rounded-md flex flex-col gap-2">
+          <label>
+            <input
+              type="text"
+              placeholder="Buscar un contacto"
+              className="bg-gray-100 w-full rounded-xl text-center p-1" // TODO: Cambiar el color del borde al hacer click
+            />
+          </label>
+          <div className="bg-blue-500 h-[93%] rounded-md text-center text-white">
+            Contactos
+          </div>
         </div>
       </div>
     </div>
