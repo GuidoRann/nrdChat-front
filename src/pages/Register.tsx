@@ -27,10 +27,15 @@ export default function Register() {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (password === confirmPassword) {
-      console.log(`${UrlBase}/createUser`);
-      await axios.post(`${UrlBase}/createUser`, userChat);
-    }
-    alert("Cuenta creada con exito"); //TODO: modificar notificacion
+      const userData = {
+        username,
+        email,
+        password,
+      };
+      await axios.post(`${UrlBase}/createUser`, userData);
+      console.log(userChat);
+      alert("Cuenta creada con exito");
+    } else alert("Las contraseñas no coinciden"); //TODO: modificar notificacion
   };
 
   return (
