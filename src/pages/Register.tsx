@@ -1,42 +1,5 @@
-import axios from "axios";
-import React, { useState } from "react";
-
 export default function Register() {
   const UrlBase = "http://localhost:8080/users";
-
-  type UserChat = {
-    username: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
-  };
-
-  const [userChat, setUserChat] = useState<UserChat>({
-    email: "",
-    password: "",
-    username: "",
-    confirmPassword: "",
-  });
-
-  const { username, email, password, confirmPassword } = userChat;
-
-  const onImputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setUserChat({ ...userChat, [e.target.name]: e.target.value });
-  };
-
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (password === confirmPassword) {
-      const userData = {
-        username,
-        email,
-        password,
-      };
-      await axios.post(`${UrlBase}/createUser`, userData);
-      console.log(userChat);
-      alert("Cuenta creada con exito");
-    } else alert("Las contraseñas no coinciden"); //TODO: modificar notificacion
-  };
 
   return (
     <div>
@@ -47,12 +10,10 @@ export default function Register() {
               Registrarse
             </h3>
           </div>
-          <form onSubmit={(e) => onSubmit(e)}>
+          <form>
             <div className="flex flex-col gap-4 p-6">
               <div className="relative h-11 w-full min-w-[200px]">
                 <input
-                  value={username}
-                  onChange={(e) => onImputChange(e)}
                   placeholder=""
                   name="username"
                   className="peer h-full w-full rounded-md border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-cyan-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
@@ -63,8 +24,6 @@ export default function Register() {
               </div>
               <div className="relative h-11 w-full min-w-[200px]">
                 <input
-                  value={email}
-                  onChange={(e) => onImputChange(e)}
                   placeholder=""
                   name="email"
                   className="peer h-full w-full rounded-md border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-cyan-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
@@ -75,8 +34,6 @@ export default function Register() {
               </div>
               <div className="relative h-11 w-full min-w-[200px]">
                 <input
-                  value={password}
-                  onChange={(e) => onImputChange(e)}
                   type="password"
                   placeholder=""
                   name="password"
@@ -88,8 +45,6 @@ export default function Register() {
               </div>
               <div className="relative h-11 w-full min-w-[200px]">
                 <input
-                  value={confirmPassword}
-                  onChange={(e) => onImputChange(e)}
                   type="password"
                   placeholder=""
                   name="confirmPassword"
