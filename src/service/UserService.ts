@@ -3,7 +3,7 @@ import axios from "axios";
 export default class UserService {
   static BASE_URL = "http://localhost:8080";
 
-  static async login(email: string, password:string) {
+  static async login(email: string, password: string) {
     try {
       const response = await axios.post(`${this.BASE_URL}/auth/login`, {
         email,
@@ -15,13 +15,17 @@ export default class UserService {
     }
   }
 
-  static async register(userData:any, token:string) {
+  static async register(userData: any, token: string | null) {
     try {
-      const response = await axios.post(`${this.BASE_URL}/auth/register`, userData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.post(
+        `${this.BASE_URL}/auth/register`,
+        userData,
+        {
+          headers: {
+            Authorization: `Bearer${token}`,
+          },
+        }
+      );
       return response.data;
     } catch (error) {
       throw error;
@@ -35,7 +39,7 @@ export default class UserService {
 
   static isAuthenticated() {
     const token = localStorage.getItem("token");
-    return !!token
+    return !!token;
   }
 
   static isAdmin() {
