@@ -1,5 +1,35 @@
+import { useEffect, useState } from "react";
+import UserService from "../service/UserService";
+
 export default function Main() {
   const img = "/images/userDef.webp";
+
+  type profileProps = {
+    name: string;
+    email: string;
+    role: string;
+  };
+
+  const [profileInfo, setProfileInfo] = useState<profileProps>({
+    name: "",
+    email: "",
+    role: "",
+  });
+
+  useEffect(() => {
+    fetchProfileInfo();
+  }, []);
+
+  const fetchProfileInfo = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await UserService.getProfileInfo(token);
+
+      setProfileInfo(response.data);
+    } catch (error) {
+      console.log("error fetching info: ", error);
+    }
+  };
 
   return (
     <div className="w-screen h-screen bg-slate-700 flex justify-center items-center">
@@ -10,7 +40,7 @@ export default function Main() {
           </div>
           <div className="flex flex-col w-[70%] h-full gap-4">
             <div className="text-center h-4/5 flex flex-col justify-center">
-              <p>El Enzo</p>
+              <p>{profileInfo?.name}</p>
             </div>
             {/* TODO: darle utilidad y estilo a los botones */}
             <div className="h-1/5 flex flex-row gap-4 justify-center">

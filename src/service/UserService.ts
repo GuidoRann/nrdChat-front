@@ -22,13 +22,27 @@ export default class UserService {
         userData,
         {
           headers: {
-            Authorization: `Bearer${token}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
       return response.data;
     } catch (error) {
       throw error;
+    }
+  }
+
+  static async getProfileInfo(token: string | null) {
+    try {
+      const response = await axios.get(`${this.BASE_URL}/user/get-profile`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log("user data from getProfileInfo: ", response.data);
+      return response.data;
+    } catch (error) {
+      console.log(error);
     }
   }
 

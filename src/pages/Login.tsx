@@ -14,11 +14,14 @@ export default function Login() {
     e.preventDefault();
     try {
       const response = await UserService.login(email, password);
+
       if (response.token) {
         localStorage.setItem("token", response.token);
         localStorage.setItem("role", response.role);
         navigate("/main");
+
       } else setError(response.error);
+      
     } catch (error: any) {
       setError(error);
       setTimeout(() => {
