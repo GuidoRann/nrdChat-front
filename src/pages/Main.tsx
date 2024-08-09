@@ -11,7 +11,7 @@ export default function Main() {
   };
 
   const [profileInfo, setProfileInfo] = useState<profileProps>({
-    name: "",
+    name: "pedro",
     email: "",
     role: "",
   });
@@ -25,7 +25,8 @@ export default function Main() {
       const token = localStorage.getItem("token");
       const response = await UserService.getProfileInfo(token);
 
-      setProfileInfo(response.data);
+      setProfileInfo(response.userChat);
+      console.log("mostrando data: ", response.userChat);
     } catch (error) {
       console.log("error fetching info: ", error);
     }

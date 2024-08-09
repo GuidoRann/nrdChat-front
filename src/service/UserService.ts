@@ -34,11 +34,14 @@ export default class UserService {
 
   static async getProfileInfo(token: string | null) {
     try {
-      const response = await axios.get(`${this.BASE_URL}/user/get-profile`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        `${this.BASE_URL}/adminuser/get-profile`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       console.log("user data from getProfileInfo: ", response.data);
       return response.data;
     } catch (error) {
