@@ -42,10 +42,25 @@ export default class UserService {
           },
         }
       );
-      console.log("user data from getProfileInfo: ", response.data);
       return response.data;
     } catch (error) {
-      console.log(error);
+      throw error;
+    }
+  }
+
+  static async getUser(token: string | null, email: string) {
+    try {
+      const response = await axios.get(
+        `${this.BASE_URL}/adminuser/get-user/${email}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      throw error;
     }
   }
 

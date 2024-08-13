@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import UserService from "../service/UserService";
+import AddFriend from "../components/AddFriend";
 
 export default function Main() {
   const img = "/images/userDef.webp";
+
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   type profileProps = {
     name: string;
@@ -11,10 +14,19 @@ export default function Main() {
   };
 
   const [profileInfo, setProfileInfo] = useState<profileProps>({
-    name: "pedro",
+    name: "",
     email: "",
     role: "",
   });
+
+  const handleLogOut = () => {
+    UserService.logout;
+    window.location.href = "/login";
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
     fetchProfileInfo();
@@ -26,27 +38,36 @@ export default function Main() {
       const response = await UserService.getProfileInfo(token);
 
       setProfileInfo(response.userChat);
-      console.log("mostrando data: ", response.userChat);
     } catch (error) {
       console.log("error fetching info: ", error);
     }
   };
 
+  const handleFriendButton = () => {
+    setIsModalOpen(true);
+  };
+
   return (
     <div className="w-screen h-screen bg-slate-700 flex justify-center items-center">
+      <AddFriend isOpen={isModalOpen} onClose={handleCloseModal} />
       <div className="bg-gray-300 w-1/4 h-5/6 flex flex-col items-center pt-6 gap-4 rounded-lg">
         <div className="w-[90%] h-32 bg-white rounded-md flex items-center p-2">
           <div className="w-28 h-28 bg-blue-300 rounded-full">
             <img src={img} alt="" />
           </div>
           <div className="flex flex-col w-[70%] h-full gap-4">
-            <div className="text-center h-4/5 flex flex-col justify-center">
+            <div className="text-center h-4/5 flex flex-row items-center justify-between px-4">
               <p>{profileInfo?.name}</p>
+              <button
+                className="hover:text-red-500 font-black"
+                onClick={handleLogOut}
+              >
+                X
+              </button>
             </div>
             {/* TODO: darle utilidad y estilo a los botones */}
             <div className="h-1/5 flex flex-row gap-4 justify-center">
-              <button className="">+</button>
-              <button className="">-</button>
+              <button onClick={handleFriendButton}>Agregar contacto</button>
             </div>
           </div>
         </div>
