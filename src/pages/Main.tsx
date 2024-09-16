@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import UserService from "../service/UserService";
 import AddFriend from "../components/AddFriend";
+import FriendList from "../components/FriendList";
 
 export default function Main() {
   const img = "/images/userDef.webp";
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isChatOpen, setIsChatOpen] = useState<boolean>(false);
 
   type profileProps = {
     name: string;
@@ -35,7 +37,7 @@ export default function Main() {
   const fetchProfileInfo = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await UserService.getProfileInfo(token);
+      const response = await UserService.getProfile(token);
 
       setProfileInfo(response.userChat);
     } catch (error) {
@@ -79,8 +81,9 @@ export default function Main() {
               className="bg-gray-100 w-full rounded-xl text-center p-1" // TODO: Cambiar el color del borde al hacer click
             />
           </label>
-          <div className="bg-blue-500 h-[93%] rounded-md text-center text-white">
+          <div className="flex flex-col gap-1 bg-blue-500 h-[93%] rounded-md text-center text-white p-1 overflow-y-auto">
             Contactos
+            <FriendList />
           </div>
         </div>
       </div>

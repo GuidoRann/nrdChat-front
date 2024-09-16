@@ -1,10 +1,8 @@
 import { useState } from "react";
 import UserService from "../service/UserService";
+import FriendshipService from "../service/FriendshipService";
+import { modalProps } from '../types/FriendTypes';
 
-interface modalProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
 
 export default function AddFriend({ isOpen, onClose }: modalProps) {
   const [contactIsPresent, setContactIsPresent] = useState<boolean>(false);
@@ -12,7 +10,17 @@ export default function AddFriend({ isOpen, onClose }: modalProps) {
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [profile, setProfile] = useState<String>("");
 
-  const handleContactIsPresent = () => {
+  const handleContactIsPresent = async () => {
+    const token = localStorage.getItem("token");
+
+    try {
+      const myUser = await UserService.getProfile(token);
+      const friend = await UserService.getUser(token, contactEmail);
+
+      FriendshipService.saveFriendship(myUser.userChat, friend.userChat, token);
+    } catch (error) {
+      throw error;
+    }
     setIsSearching(false);
   };
 

@@ -15,16 +15,11 @@ export default class UserService {
     }
   }
 
-  static async register(userData: any, token: string | null) {
+  static async register(userData: any) {
     try {
       const response = await axios.post(
         `${this.BASE_URL}/auth/register`,
-        userData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        userData
       );
       return response.data;
     } catch (error) {
@@ -32,7 +27,7 @@ export default class UserService {
     }
   }
 
-  static async getProfileInfo(token: string | null) {
+  static async getProfile(token: string | null) {
     try {
       const response = await axios.get(
         `${this.BASE_URL}/adminuser/get-profile`,
