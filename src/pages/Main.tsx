@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import UserService from "../service/UserService";
 import AddFriend from "../components/AddFriend";
 import FriendList from "../components/FriendList";
+import { useManagementProfile } from '../components/profile/useManagementProfile';
 
 export default function Main() {
   const img = "/images/userDef.webp";
@@ -9,40 +10,19 @@ export default function Main() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isChatOpen, setIsChatOpen] = useState<boolean>(false);
 
-  type profileProps = {
-    name: string;
-    email: string;
-    role: string;
-  };
-
-  const [profileInfo, setProfileInfo] = useState<profileProps>({
-    name: "",
-    email: "",
-    role: "",
-  });
-
-  const handleLogOut = () => {
-    UserService.logout;
-    window.location.href = "/login";
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
+  const { profileInfo, fetchProfileInfo } = useManagementProfile();
 
   useEffect(() => {
     fetchProfileInfo();
   }, []);
 
-  const fetchProfileInfo = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      const response = await UserService.getProfile(token);
-
-      setProfileInfo(response.userChat);
-    } catch (error) {
-      console.log("error fetching info: ", error);
-    }
+  const handleLogOut = () => {
+    UserService.logout;
+    window.location.href = "/login";
+  };
+  
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
   };
 
   const handleFriendButton = () => {
