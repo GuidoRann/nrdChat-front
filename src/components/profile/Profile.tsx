@@ -9,10 +9,6 @@ import AcceptFriend from '../friendlist/AcceptFriend';
 
 export const Profile = () => {
 
-  const handleClick = () => {
-    // Lógica para abrir modal y mostrar lista de amigos pendientes
-  }
-
   const img = "/images/userDef.webp";
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -21,7 +17,7 @@ export const Profile = () => {
 
   const { profileInfo, fetchProfileInfo } = useManagementProfile();
   const { getActualFriendList } = useManagementFriends();
-  const { storeFriendlist, storeAcceptedFriends, storePendingFriends } = useFriendStore();
+  const { storePendingFriends } = useFriendStore();
 
   useEffect(() => {
     fetchProfileInfo();
@@ -30,6 +26,7 @@ export const Profile = () => {
 
   const handleLogOut = () => {
     UserService.logout;
+    localStorage.clear();
     window.location.href = "/login";
   };
   
@@ -84,7 +81,6 @@ export const Profile = () => {
           </label>
           <div className="flex flex-col gap-1 bg-blue-500 h-[93%] rounded-md text-center text-white p-1 overflow-y-auto">
             Contactos
-            <div></div>
             <FriendList />
           </div>
         </div>

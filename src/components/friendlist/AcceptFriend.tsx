@@ -9,10 +9,12 @@ export default function AcceptFriend({ isOpen, onClose }: modalProps) {
   const { storePendingFriends } = useFriendStore();
   const { getActualFriendList } = useManagementFriends();
 
-  const handleFriendAcceptance = async (friendId: string) => {
+  const handleFriendAcceptance = async ( user: any, friend: any ) => {
+    const token = localStorage.getItem("token");
+
     try {
       // Llamada para aceptar al amigo
-       await FriendshipService.acceptFriend(friendId);
+       await FriendshipService.acceptFriend( user, friend, token );
       // Actualizar la lista de amigos después de la aceptación
       getActualFriendList();
     } catch (error) {
@@ -20,10 +22,12 @@ export default function AcceptFriend({ isOpen, onClose }: modalProps) {
     }
   };
 
-  const handleDeleteFriend = async (friendId: string) => {
+  const handleDeleteFriend = async ( user: any, friend: any) => {
+    const token = localStorage.getItem("token");
+
     try {
-      // Llamada para eliminar al amigo
-       await FriendshipService.deleteFriend(friendId);
+      // // Llamada para eliminar al amigo
+       await FriendshipService.deleteFriend( user, friend, token );
       // Actualizar la lista de amigos
       getActualFriendList();
     } catch (error) {
@@ -47,12 +51,12 @@ export default function AcceptFriend({ isOpen, onClose }: modalProps) {
                 </button>
               </div>
               <div className="py-3 ">
-              {storePendingFriends.map(({ friendId, friend }: any) => (
-                <div key={friendId} className="flex items-center justify-between mb-2">
+              {storePendingFriends.map(({ friendshipId, friend, user }: any) => (
+                <div key={friendshipId} className="flex items-center justify-between mb-2">
                 <Usertag name={friend.name} />
                   <div className="flex p-5">
-                    <button className="mr-2" onClick={() => handleFriendAcceptance(friendId)}>Accept</button>
-                    <button onClick={() => handleDeleteFriend(friendId)}>Cancelar</button>
+                    <button className="mr-2" onClick={() => handleFriendAcceptance(user, friend)}>Accept</button>
+                    <button onClick={() => handleDeleteFriend(user, friend)}>Cancelar</button>
                   </div>
                 </div>
               ))}

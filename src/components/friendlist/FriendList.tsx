@@ -9,8 +9,8 @@ export default function FriendList() {
 
   return (
     <div>
-      {storeAcceptedFriends.map(({ friendId, friend }: any) => (
-        <Usertag key={friendId} name={friend.name} />
+      {storeAcceptedFriends.map(({ friendshipId, friend }: any) => (
+        <Usertag key={friendshipId} name={friend.name} />
       ))}
     </div>
   );
