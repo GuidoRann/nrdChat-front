@@ -10,6 +10,13 @@ export default function Main() {
   }, [ getActualFriendList ]);
   
   return (
-    <Profile />
+    <div className="flex w-screen h-screen">
+      <div className="w-1/6 justify-center items-center">
+        <Profile />
+      </div>
+      <div className="w-5/6 bg-slate-500">
+        <h1>Main</h1>
+      </div>
+    </div>
   );
 }

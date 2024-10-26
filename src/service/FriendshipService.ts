@@ -1,4 +1,4 @@
-import axios, {AxiosError} from "axios";
+import axios from "axios";
 
 export default class FriendshipService {
   static BASE_URL = "http://localhost:8080";
@@ -23,28 +23,8 @@ export default class FriendshipService {
     }
   }
 
-  static async getFriendship(userEmail: string, friendEmail: string, token: string | null) {
-    try {
-      console.log("Enviando petición getFriendship...");
-      const response = await axios.get(`${this.BASE_URL}/auth/get-friendship`, 
-        {
-          params: {
-            userEmail,
-            friendEmail,
-          },
-          headers: {
-            Authorization: `Bearer ${token}`
-          },
-      });
-      return response.data;
-    } catch (error) {
-      throw error;
-    }
-  }
-
   static async getFriendList(token: string | null) {
     try {
-      console.log("Enviando petición getFriendList...");
       const response = await axios.get(`${this.BASE_URL}/auth/get-friendlist`, 
         {
           headers: {
@@ -60,7 +40,6 @@ export default class FriendshipService {
 
   static async acceptFriend( user: any, friend: any, token: string | null ) {
     try {
-      console.log("Enviando peticion acceptFriend...");
       const response = await axios.put(
         `${this.BASE_URL}/auth/accept-friend`,
         {

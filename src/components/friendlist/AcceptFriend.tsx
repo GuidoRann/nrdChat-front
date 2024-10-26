@@ -53,7 +53,7 @@ export default function AcceptFriend({ isOpen, onClose }: modalProps) {
               <div className="py-3 ">
               {storePendingFriends.map(({ friendshipId, friend, user }: any) => (
                 <div key={friendshipId} className="flex items-center justify-between mb-2">
-                <Usertag name={friend.name} />
+                <Usertag name={user.name} />
                   <div className="flex p-5">
                     <button className="mr-2" onClick={() => handleFriendAcceptance(user, friend)}>Accept</button>
                     <button onClick={() => handleDeleteFriend(user, friend)}>Cancelar</button>

@@ -10,7 +10,7 @@ export default function AddFriend({ isOpen, onClose }: modalProps) {
   const [contactEmail, setContactEmail] = useState<string>("");
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [profile, setProfile] = useState<String>("");
-  const getActualFriendList = useManagementFriends();
+  const { getActualFriendList } = useManagementFriends();
 
   const handleContactIsPresent = async () => {
     const token = localStorage.getItem("token");
@@ -19,11 +19,12 @@ export default function AddFriend({ isOpen, onClose }: modalProps) {
       const myUser = await UserService.getProfile(token);
       const friend = await UserService.getUser(token, contactEmail);
 
-      FriendshipService.saveFriendship(myUser.userChat, friend.userChat, token);
+      FriendshipService.saveFriendship( myUser.userChat, friend.userChat, token );
     } catch (error) {
       throw error;
     }
-    getActualFriendList
+
+    getActualFriendList()
     setIsSearching(false);
   };
 
