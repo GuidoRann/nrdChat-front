@@ -1,4 +1,4 @@
-export type profileProps = {
+export interface profileProps {
   name: string;
   email: string;
   role: string;

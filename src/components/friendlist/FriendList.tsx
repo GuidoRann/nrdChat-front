@@ -9,45 +9,9 @@ export default function FriendList() {
 
   return (
     <>
-      {/* {storeAcceptedFriends.map(({ friendshipId, user }: any) => (
+      {storeAcceptedFriends.map(({ friendshipId, user }: any) => (
         <Usertag key={friendshipId} name={user.name} />
-      ))} */}
-      <Usertag name="test" />
-      <Usertag name="test" />
-      <Usertag name="test" />
-      <Usertag name="test" />
-      <Usertag name="test" />
-      <Usertag name="test" />
-      <Usertag name="test" />
-      <Usertag name="test" />
-      <Usertag name="test" />
-      <Usertag name="test" />
-      <Usertag name="test" />
-      <Usertag name="test" />
-      <Usertag name="test" />
-      <Usertag name="test" />
-      <Usertag name="test" />
-      <Usertag name="test" />
-      <Usertag name="test" />
-      <Usertag name="test" />
-      <Usertag name="test" />
-      <Usertag name="test" />
-      <Usertag name="test" />
-      <Usertag name="test" />
-      <Usertag name="test" />
-      <Usertag name="test" />
-      <Usertag name="test" />
-      <Usertag name="test" />
-      <Usertag name="test" />
-      <Usertag name="test" />
-      <Usertag name="test" />
-      <Usertag name="test" />
-      <Usertag name="test" />
-      <Usertag name="test" />
-      <Usertag name="test" />
-      <Usertag name="test" />
-      <Usertag name="test" />
-      <Usertag name="test" />
+      ))}
     </>
   );
 }
